@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biodata-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: biodata-service
+  template:
+    metadata:
+      labels:
+        app: biodata-service
+    spec:
+      containers:
+      - name: biodata-service
+        image: hashicorp/http-echo
+        args: ["-text='Biodata Service!'"]
+        ports:
+        - containerPort: 5678
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 500m

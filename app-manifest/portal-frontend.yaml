@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: portal-frontend
+  template:
+    metadata:
+      labels:
+        app: portal-frontend
+    spec:
+      containers:
+      - name: portal-frontend
+        image: hashicorp/http-echo
+        args: ["-text='Hello from Portal Frontend!'"]
+        ports:
+        - containerPort: 5678
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 500m

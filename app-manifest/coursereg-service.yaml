@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coursereg-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: coursereg-service
+  template:
+    metadata:
+      labels:
+        app: coursereg-service
+    spec:
+      containers:
+      - name: coursereg-service
+        image: hashicorp/http-echo
+        args: ["-text='Course Registration Service!'"]
+        ports:
+        - containerPort: 5678
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 500m

@@ -1,0 +1,92 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portal-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: http-01-production
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - portal.samuelpepple.online
+        - auth.samuelpepple.online
+        - payment.samuelpepple.online
+        - biodata.samuelpepple.online
+        - coursereg.samuelpepple.online
+        - results.samuelpepple.online
+        - notification.samuelpepple.online
+      secretName: portal-tls
+  rules:
+    - host: portal.samuelpepple.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portal-frontend
+                port:
+                  number: 80
+    - host: auth.samuelpepple.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 80
+    - host: payment.samuelpepple.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-service
+                port:
+                  number: 80
+    - host: biodata.samuelpepple.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: biodata-service
+                port:
+                  number: 80
+    - host: coursereg.samuelpepple.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: coursereg-service
+                port:
+                  number: 80
+    - host: results.samuelpepple.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: results-service
+                port:
+                  number: 80
+    - host: notification.samuelpepple.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: notification-service
+                port:
+                  number: 80
