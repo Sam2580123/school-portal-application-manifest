@@ -9,16 +9,16 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - portal.samuelpepple.online
-        - auth.samuelpepple.online
-        - payment.samuelpepple.online
-        - biodata.samuelpepple.online
-        - coursereg.samuelpepple.online
-        - results.samuelpepple.online
-        - notification.samuelpepple.online
-      secretName: portal-tls
+  # tls:
+  #   - hosts:
+  #       - portal.samuelpepple.online
+  #       - auth.samuelpepple.online
+  #       - payment.samuelpepple.online
+  #       - biodata.samuelpepple.online
+  #       - coursereg.samuelpepple.online
+  #       - results.samuelpepple.online
+  #       - notification.samuelpepple.online
+  #     secretName: portal-tls
   rules:
     - host: portal.samuelpepple.online
       http:
